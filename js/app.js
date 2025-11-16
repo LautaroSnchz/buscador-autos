@@ -7,17 +7,16 @@ const puertas = document.querySelector('#puertas');
 const transmision = document.querySelector('#transmision');
 const color = document.querySelector('#color');
 
-// crear los años
-const years = document.createElement('option');
-const max = new Date().getFullYear();
-const min = max - 10;
+// crear los años en base a los autos existentes
+const yearsArray = autos.map(auto => auto.year);
+const max = Math.max(...yearsArray); // año más nuevo de mi DB
+const min = Math.min(...yearsArray); // año más viejo de mi DB
 
-
-for(let i = max; i >  min; i--) {
-    const option =  document.createElement('option');
+for (let i = max; i >= min; i--) {
+    const option = document.createElement('option');
     option.value = i;
-    option.innerText = i;
-    document.querySelector('#year').appendChild(option);
+    option.textContent = i;
+    year.appendChild(option);
 }
 
 // Datos para la busqueda
@@ -32,8 +31,32 @@ const datosBusqueda = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarAutos(autos);
+    mostrarMensajeInicial();
 });
+
+function mostrarMensajeInicial() {
+    limpiarHTML();
+    const contenedor = document.querySelector('#resultado');
+
+    const mensaje = document.createElement('div');
+    mensaje.classList.add('mensaje-inicial');
+    mensaje.innerHTML = `
+        <h3>Empieza tu búsqueda</h3>
+        <p>Usa los filtros de arriba para ver los autos disponibles.</p>
+    `;
+    contenedor.appendChild(mensaje);
+}
+
+function filtrosVacios() {
+    return !datosBusqueda.marca &&
+           !datosBusqueda.year &&
+           !datosBusqueda.minimo &&
+           !datosBusqueda.maximo &&
+           !datosBusqueda.puertas &&
+           !datosBusqueda.transmision &&
+           !datosBusqueda.color;
+}
+
 
 // Event Listeners para el formulario
 marca.addEventListener('input', e => {
@@ -91,21 +114,43 @@ function limpiarHTML() {
     }
 }
 
-function mostrarAutos(autos){
+function mostrarAutos(autos) {
     limpiarHTML();
 
-    // Leer el elemento Resultado
     const contenedor = document.querySelector('#resultado');
 
-    // Construir el HTML de los autos
     autos.forEach(auto => {
-        const autoHTML = document.createElement('p');
-        autoHTML.innerHTML = `
-            <p>${auto.marca} ${auto.modelo} - ${auto.year} - ${auto.puertas} Puertas - Transmisión: ${auto.transmision} - Precio: ${auto.precio} - Color: ${auto.color}</p>
-        `;
-        contenedor.appendChild(autoHTML);
-    })
+        const card = document.createElement('article');
+        card.classList.add('card-auto');
+
+        const precioFormateado = auto.precio.toLocaleString('es-AR');
+
+card.innerHTML = `
+    <div class="card-auto__img-wrapper">
+        <img src="${auto.imagen}" alt="${auto.marca} ${auto.modelo}">
+    </div>
+    <div class="card-auto__body">
+        <div class="card-auto__header">
+            <h3 class="card-auto__title">${auto.marca} ${auto.modelo}</h3>
+            <p class="card-auto__price">$ ${precioFormateado}</p>
+        </div>
+        <p class="card-auto__meta">
+            ${auto.year} · ${auto.puertas} puertas · 
+            ${auto.transmision === 'automatico' ? 'Automática' : 'Manual'}
+        </p>
+        <p class="card-auto__tag">Color: ${auto.color}</p>
+        <div class="card-auto__footer">
+            <button class="card-auto__btn">Contactar</button>
+        </div>
+    </div>
+`;
+
+
+        contenedor.appendChild(card);
+    });
 }
+
+
 function noResultado() {
     limpiarHTML();
 
@@ -116,14 +161,25 @@ function noResultado() {
 }
 
 function filtrarAuto() {
-   const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
+    if (filtrosVacios()) {
+        mostrarMensajeInicial();
+        return;
+    }
 
-//    console.log(resultado);
-   if(resultado.length){
+    const resultado = autos
+        .filter(filtrarMarca)
+        .filter(filtrarYear)
+        .filter(filtrarMinimo)
+        .filter(filtrarMaximo)
+        .filter(filtrarPuertas)
+        .filter(filtrarTransmision)
+        .filter(filtrarColor);
+
+    if (resultado.length) {
         mostrarAutos(resultado);
-   } else {
-       noResultado();
-   }
+    } else {
+        noResultado();
+    }
 }
 
 

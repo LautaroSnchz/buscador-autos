@@ -12,37 +12,52 @@
 </head>
 <body>
 
-    <h1>Buscador de Autos</h1>
+    <header class="hero">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <p class="hero__tag">LS Automotores</p>
+            <h1 class="hero__title">Buscador de Autos</h1>
+            <p class="hero__subtitle">
+                Filtra por marca, año, precio y más para encontrar tu próximo auto ideal.
+            </p>
+        </div>
+    </header>
 
-    <div class="contenedor">
+    <main class="main">
+        <div class="contenedor">
 
-        <form id="buscador">
-            <div id="toast" class="toast">
-                ¿Tienes alguna duda?<img src="img/wp.png" alt="WhatsApp" class="toast-icon">
-                
-            </div>
-            <div class="row">
-                <div class="three columns">
-                    <label for="marca">Marca</label>
-                    <select class="u-full-width" id="marca">
-                        <option value="">Seleccione</option>
-                        <option value="Audi">Audi</option>
-                        <option value="BMW">BMW</option>
-                        <option value="Mercedes Benz">Mercedes Benz</option>
-                        <option value="Chevrolet">Chevrolet</option>
-                        <option value="Ford">Ford</option>
-                        <option value="Dodge">Dodge</option>
-                    </select>
+            <form id="buscador" class="filter-card">
+                <div id="toast" class="toast">
+                    ¿Tienes alguna duda?
+                    <img src="img/wp-icon.png" alt="WhatsApp" class="toast-icon">
                 </div>
-                <div class="three columns">
-                    <label for="year">Año</label>
-                    <select class="u-full-width" id="year">
-                        <option value="">Seleccione</option>
-                    </select>
-                </div>
-                <div class="three columns">
-                    <label for="minimo">Precio Min</label>
-                    <select class="u-full-width" id="minimo">
+
+                <h2 class="filter-card__title">Filtrar resultados</h2>
+
+                <div class="filters-grid">
+                    <div class="filter-field">
+                        <label for="marca">Marca</label>
+                        <select class="u-full-width" id="marca">
+                            <option value="">Seleccione</option>
+                            <option value="Audi">Audi</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Mercedes Benz">Mercedes Benz</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Dodge">Dodge</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label for="year">Año</label>
+                        <select class="u-full-width" id="year">
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label for="minimo">Precio Min</label>
+                        <select class="u-full-width" id="minimo">
                             <option value="">Seleccione</option>
                             <option value="20000">20,000</option>
                             <option value="30000">30,000</option>
@@ -52,11 +67,12 @@
                             <option value="70000">70,000</option>
                             <option value="80000">80,000</option>
                             <option value="90000">90,000</option>
-                    </select>
-                </div>
-                <div class="three columns">
-                    <label for="maximo">Precio Max</label>
-                    <select class="u-full-width" id="maximo">
+                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label for="maximo">Precio Max</label>
+                        <select class="u-full-width" id="maximo">
                             <option value="">Seleccione</option>
                             <option value="20000">20,000</option>
                             <option value="30000">30,000</option>
@@ -66,48 +82,51 @@
                             <option value="70000">70,000</option>
                             <option value="80000">80,000</option>
                             <option value="90000">90,000</option>
-                    </select>
-                </div>
-                <div class="row">
-                    <div class="four columns">
+                        </select>
+                    </div>
+
+                    <div class="filter-field">
                         <label for="puertas">Puertas</label>
                         <select class="u-full-width" id="puertas">
-                                <option value="">Seleccione</option>
-                                <option value="2">2</option>
-                                <option value="4">4</option>
+                            <option value="">Seleccione</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
                         </select>
                     </div>
-                    <div class="four columns">
+
+                    <div class="filter-field">
                         <label for="transmision">Transmisión</label>
                         <select class="u-full-width" id="transmision">
-                                <option value="">Seleccione</option>
-                                <option value="automatico">Automática</option>
-                                <option value="manual">Manual</option>
+                            <option value="">Seleccione</option>
+                            <option value="automatico">Automática</option>
+                            <option value="manual">Manual</option>
                         </select>
                     </div>
-                    <div class="four columns">
+
+                    <div class="filter-field">
                         <label for="color">Color</label>
                         <select class="u-full-width" id="color">
-                                <option value="">Seleccione</option>
-                                <option value="Negro">Negro</option>
-                                <option value="Azul">Azul</option>
-                                <option value="Blanco">Blanco</option>
-                                <option value="Rojo">Rojo</option>
+                            <option value="">Seleccione</option>
+                            <option value="Negro">Negro</option>
+                            <option value="Azul">Azul</option>
+                            <option value="Blanco">Blanco</option>
+                            <option value="Rojo">Rojo</option>
                         </select>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
+            <section class="resultados">
+                <h2 class="resultados__title">Resultados</h2>
+                <div id="resultado" class="resultados__grid"></div>
+            </section>
+        </div>
 
-        <h1>Resultados</h1>
-        <div id="resultado"></div>
-    </div>
-
-    <a class="sitio-web" href="" rel="" >Ls Automotores</a>
+        <a class="sitio-web" href="#" rel="">lsanchez.dev / LS Automotores</a>
+    </main>
 
     <script src="js/db.js"></script>
     <script src="js/app.js"></script>
-    
 </body>
+
 </html>
