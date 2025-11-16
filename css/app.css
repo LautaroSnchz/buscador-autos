@@ -454,7 +454,7 @@ select.u-full-width:focus {
 .toast {
     visibility: hidden;
     min-width: 230px;
-    background: #050816;               /* fondo oscuro */
+    background: #050816;               
     color: #f9fafb;
     border-radius: 999px;
     padding: 0.75rem 1.6rem;
@@ -466,7 +466,7 @@ select.u-full-width:focus {
 
     display: flex;
     align-items: center;
-    justify-content: space-between;    /* texto a la izq, icono a la derecha */
+    justify-content: space-between;  
     gap: 1rem;
 
     box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
@@ -477,7 +477,7 @@ select.u-full-width:focus {
 /* Cuando se muestra */
 .toast.show {
     visibility: visible;
-    animation: toastInVibrate 0.7s ease forwards;
+    animation: toastInVibrate 1s ease forwards;
 }
 
 /* Animación: entra + vibra como notificación */
