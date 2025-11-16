@@ -202,9 +202,9 @@ const autos = [
 },
 {
     marca: 'Chevrolet',
-    modelo: 'Tahoe High Country',
+    modelo: 'Tahoe',
     year: 2021,
-    precio: 67000,
+    precio:67000,
     puertas: 4,
     color: 'Negro',
     transmision: 'automatico',
@@ -212,9 +212,9 @@ const autos = [
 },
 {
     marca: 'Chevrolet',
-    modelo: 'Suburban Premier',
+    modelo: 'Suburban',
     year: 2021,
-    precio: 84000,
+    precio:84000,
     puertas: 4,
     color: 'Negro',
     transmision: 'automatico',
